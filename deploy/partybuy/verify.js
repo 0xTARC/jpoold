@@ -1,4 +1,4 @@
-const {getDeployedAddresses, verifyContract, loadEnv, loadConfig } = require("../helpers");
+const {getDeployedAddresses, loadEnv, loadConfig } = require("../helpers");
 
 async function verify() {
     // load .env
@@ -18,21 +18,21 @@ async function verify() {
     const {contractAddresses} = getDeployedAddresses('partybuy', CHAIN_NAME);
     const {partyBuyFactory, partyBuyLogic, allowList} = contractAddresses;
 
-    console.log(`Verifying ${CHAIN_NAME}`);
+    // console.log(`Verifying ${CHAIN_NAME}`);
 
-    console.log(`Verify AllowList`);
-    await verifyContract(allowList, []);
+    // console.log(`Verify AllowList`);
+    // await verifyContract(allowList, []);
 
-    console.log(`Verify PartyBuy Factory`);
-    await verifyContract(partyBuyFactory, [
-        partyDAOMultisig,
-        fractionalArtERC721VaultFactory,
-        weth,
-        allowList
-    ]);
+    // console.log(`Verify PartyBuy Factory`);
+    // await verifyContract(partyBuyFactory, [
+    //     partyDAOMultisig,
+    //     fractionalArtERC721VaultFactory,
+    //     weth,
+    //     allowList
+    // ]);
 
-    console.log(`Verify PartyBuy Logic`);
-    await verifyContract(partyBuyLogic, [partyDAOMultisig, fractionalArtERC721VaultFactory, weth, allowList]);
+    // console.log(`Verify PartyBuy Logic`);
+    // await verifyContract(partyBuyLogic, [partyDAOMultisig, fractionalArtERC721VaultFactory, weth, allowList]);
 }
 
 module.exports = {

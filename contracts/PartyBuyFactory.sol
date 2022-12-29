@@ -63,6 +63,7 @@ contract PartyBuyFactory {
 
     //======== Deploy function =========
 
+    /// Delegates call to implementation contract's initialize function, with remaining args as calldata
     function startParty(
         address _nftContract,
         uint256 _tokenId,

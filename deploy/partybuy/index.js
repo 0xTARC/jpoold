@@ -26,13 +26,14 @@ async function deployPartyBuyFactory() {
     const {directory, filename, contractAddresses} = getDeployedAddresses('partybuy', CHAIN_NAME);
     // setup deployer wallet
     const deployer = getDeployer(RPC_ENDPOINT, DEPLOYER_PRIVATE_KEY);
+    console.log('deployer: ', deployer);
 
     //  Deploy AllowList
     console.log(`Deploy AllowList to ${CHAIN_NAME}`);
     const allowList = await deploy(deployer, 'AllowList');
     console.log(`Deployed AllowList to ${CHAIN_NAME}`);
 
-    // Deploy PartyBid Factory
+    // Deploy PartyBuy Factory
     console.log(`Deploy PartyBuy Factory to ${CHAIN_NAME}`);
     const factory = await deploy(deployer,'PartyBuyFactory', [
         partyDAOMultisig,

@@ -1,3 +1,5 @@
+const {ethers} = require("hardhat");
+
 async function deploy(name, args = []) {
   const Implementation = await ethers.getContractFactory(name);
   const contract = await Implementation.deploy(...args);
@@ -10,6 +12,7 @@ async function getTokenVault(party, signer) {
   return new ethers.Contract(vaultAddress, TokenVault.interface, signer);
 }
 
+/// Deploys a test NFT, Fractional Vault Factory, AllowList, PartyBuyFactory, and starts a party and returns the active party contract
 async function deployTestContractSetup(
   provider,
   artistSigner,
@@ -21,6 +24,7 @@ async function deployTestContractSetup(
   fakeMultisig = false,
   gatedToken = '0x0000000000000000000000000000000000000000',
   gatedTokenAmount = 0,
+  shouldDeployTestParty = true,
 ) {
   // Deploy WETH
   const weth = await deploy('EtherToken');
@@ -45,7 +49,7 @@ async function deployTestContractSetup(
 
   const allowList = await deploy('AllowList');
 
-  // Deploy PartyBid Factory (including PartyBid Logic + Reseller Whitelist)
+  // Deploy PartyBuy Factory (including PartyBuy Logic + Reseller Whitelist)
   const factory = await deploy('PartyBuyFactory', [
     partyDAOMultisig.address,
     tokenVaultFactory.address,
@@ -53,24 +57,29 @@ async function deployTestContractSetup(
     allowList.address,
   ]);
 
-  // Deploy PartyBid proxy
-  await factory.startParty(
-    nftContract.address,
-    tokenId,
-    maxPrice,
-    secondsToTimeout,
-    [splitRecipient, splitBasisPoints],
-    [gatedToken, gatedTokenAmount],
-    'Parrrrti',
-    'PRTI',
-  );
+  let partyBuy = ethers.constants.AddressZero
+  // Allows JPOOLd to integration test specific party buys on mainnet
+  if (shouldDeployTestParty) {
+    // Used to test with default party
+    // Deploy a new PartyBid
+    await factory.startParty(
+      nftContract.address,
+      tokenId,
+      maxPrice,
+      secondsToTimeout,
+      [splitRecipient, splitBasisPoints],
+      [gatedToken, gatedTokenAmount],
+      'Parrrrti',
+      'PRTI',
+    );
 
-  // Get PartyBid ethers contract
-  const partyBuy = await getPartyBuyContractFromEventLogs(
-    provider,
-    factory,
-    artistSigner,
-  );
+    // Get PartyBuy ethers contract
+    partyBuy = await getPartyBuyContractFromEventLogs(
+      provider,
+      factory,
+      artistSigner,
+    );
+  }
 
   return {
     nftContract,
@@ -111,4 +120,5 @@ module.exports = {
   deployTestContractSetup,
   getTokenVault,
   deploy,
+  getPartyBuyContractFromEventLogs,
 };

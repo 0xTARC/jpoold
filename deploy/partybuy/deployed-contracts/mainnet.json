@@ -1,6 +1,6 @@
 {
   "chain": "mainnet",
-  "partyBuyFactory": "0x10Fb0f8860c11cCcdf85f2f56e3B8e1DdEb2BA3F",
-  "partyBuyLogic": "0x2045427276B2Ad409202eea1E0C81E150f3203E4",
-  "allowList": "0xF3380293Ef7f7b71c7c2656A5bEe926fa71338ed"
+  "partyBuyFactory": "0x9881B36281d0324504e04697465906ED79dAa2AD",
+  "partyBuyLogic": "0x8D946Ac66D4426d77717c09Dd20414Bec3f5346d",
+  "allowList": "0x560e5c663e4C90D51CFe3fd1AaA1F73Ec53C1DEC"
 }

@@ -36,7 +36,9 @@
     "@openzeppelin/contracts-upgradeable2": "npm:@openzeppelin/contracts-upgradeable@^3.4.0",
     "@openzeppelin/contracts2": "npm:@openzeppelin/contracts@^3.2.0",
     "@openzeppelin/hardhat-upgrades": "^1.9.0",
-    "dotenv": "^10.0.0"
+    "@typechain/hardhat": "^6.1.5",
+    "dotenv": "^10.0.0",
+    "opensea-js": "^4.0.12"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
@@ -46,7 +48,7 @@
     "eslint": "^7.20.0",
     "ethereum-waffle": "^3.2.2",
     "ethers": "^5.5.3",
-    "hardhat": "^2.0.8",
+    "hardhat": "^2.9.0",
     "hardhat-gas-reporter": "^1.0.4",
     "prettier": "^2.5.1",
     "prettier-plugin-solidity": "^1.0.0-beta.5",

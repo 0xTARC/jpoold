@@ -183,6 +183,8 @@ describe('Buy', async () => {
           ).to.be.revertedWith('PartyBuy::buy: failed to buy token');
         });
 
+        ////////////////////////////////////////////////////////////////////////////////
+
         it('Buys the NFT successfully', async () => {
           // encode data to buy NFT
           const data = encodeData(sellerContract, 'sell', [
